@@ -48,7 +48,7 @@ public class BootcoinMovementServiceImpl implements BootcoinMovementService {
                                 .flatMap(mvt -> bootcoinMovementRepository.save(mvt))
                                 .flatMap(mvt -> validateTransferBootcoin(movementDto).then(Mono.just(mvt)))
                                 .flatMap(mvt -> {
-                                    bootcoinProducer.sendMessage(mapperBootcoinBalanceModel(mvt.getIdBootcoinMovement(), mvt.getBalance()));
+                                    bootcoinProducer.sendMessage(mapperBootcoinBalanceModel(mvt.getBootcoin().getIdBootCoin(), mvt.getBalance()));
                                     return Mono.just(mvt);
                                 })
                         )
