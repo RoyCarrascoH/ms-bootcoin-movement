@@ -68,7 +68,7 @@ public class BootcoinMovementServiceImpl implements BootcoinMovementService {
         log.info("ini validateTransfer-------0: " + bootcoinMovementBean.toString());
         if (bootcoinMovementBean.getBootcoinMovementType().equals("transfer-out")) { // transferencia de salida.
             log.info("1 validateTransfer-------transfer-out: ");
-            return bootcoinRepository.findBootcoinByDocumentNumber(bootcoinMovementBean.getDocumentNumberForTransfer())
+            return bootcoinRepository.findBootcoinByDocumentNumber(bootcoinMovementBean.getDocumentNumber())
                     .switchIfEmpty(Mono.error(new ResourceNotFoundException("Bootcoin", "DocumentNumber", bootcoinMovementBean.getDocumentNumberForTransfer())))
                     .flatMap(ac -> {
 
@@ -84,7 +84,7 @@ public class BootcoinMovementServiceImpl implements BootcoinMovementService {
                     });
         } else if (bootcoinMovementBean.getBootcoinMovementType().equals("input-transfer")) {
             log.info("2 validateTransfer-------input-transfer: ");
-            return bootcoinRepository.findBootcoinByDocumentNumber(bootcoinMovementBean.getDocumentNumberForTransfer())
+            return bootcoinRepository.findBootcoinByDocumentNumber(bootcoinMovementBean.getDocumentNumber())
                     .switchIfEmpty(Mono.error(new ResourceNotFoundException("Bootcoin", "DocumentNumber", bootcoinMovementBean.getDocumentNumberForTransfer())));
         } else {
             log.info("3 validateTransfer------- : ");
