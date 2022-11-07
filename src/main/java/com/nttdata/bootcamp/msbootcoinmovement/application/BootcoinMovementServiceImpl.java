@@ -66,8 +66,8 @@ public class BootcoinMovementServiceImpl implements BootcoinMovementService {
 
     public Mono<Bootcoin> validateTransferBootcoin(BootcoinMovementBean bootcoinMovementBean) {
         log.info("ini validateTransfer-------0: " + bootcoinMovementBean.toString());
-        if (bootcoinMovementBean.getBootcoinMovementType().equals("output-transfer")) { // transferencia de salida.
-            log.info("1 validateTransfer-------output-transfer: ");
+        if (bootcoinMovementBean.getBootcoinMovementType().equals("transfer-out")) { // transferencia de salida.
+            log.info("1 validateTransfer-------transfer-out: ");
             return bootcoinRepository.findBootcoinByDocumentNumber(bootcoinMovementBean.getDocumentNumberForTransfer())
                     .switchIfEmpty(Mono.error(new ResourceNotFoundException("Bootcoin", "DocumentNumber", bootcoinMovementBean.getDocumentNumberForTransfer())))
                     .flatMap(ac -> {
